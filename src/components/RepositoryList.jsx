@@ -6,20 +6,17 @@ import axios from "axios";
 
 // https://api.github.com/orgs/rocketseat/repos
 
-const mockRepository = { name: "teste", description: "description", link: "link" };
-
 export function RepositoryList() {
 	const [repositories, setRepositories] = useState([]);
 
 	async function fetchRepos() {
 		try {
-			const response = await axios.get('https://api.github.com/orgs/rocketdseat/repos')
+			const response = await axios.get('https://api.github.com/orgs/rocketseat/repos')
 			setRepositories(response.data);
 		} catch (error) {
 			console.log(error.message)
 			alert(error.message)
 		}
-
 	}
 
 	useEffect(() => {
@@ -33,7 +30,7 @@ export function RepositoryList() {
 			<ul>
 				{
 					repositories.map(repository => <RepositoryItem
-						repository={repository} />)
+						repository={repository} key={repository.name} />)
 				}
 			</ul>
 		</section>
