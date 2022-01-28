@@ -4,7 +4,7 @@ export default function ({ repository }) {
       <li>
         <strong>{repository.name}</strong>
         <p>{repository.description}</p>
-        <a href="">{repository.link}</a>
+        <a href="">{repository.url}</a>
       </li>
     </>
   )

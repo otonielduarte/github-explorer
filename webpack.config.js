@@ -1,4 +1,6 @@
 const path = require('path')
+require("@babel/polyfill");
+
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -8,7 +10,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 module.exports = {
 	mode: isDevelopment ? 'development' : 'production',
 	devtool: isDevelopment ? 'eval-source-map' : 'source-map',
-	entry: path.resolve(__dirname, 'src', 'index.jsx'),
+	entry: ['@babel/polyfill', path.resolve(__dirname, 'src', 'index.jsx')],
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'bundle.js',

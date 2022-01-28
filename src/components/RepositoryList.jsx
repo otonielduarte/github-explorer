@@ -1,16 +1,40 @@
 import RepositoryItem from "./RepositoryItem";
 
+import '../styles/repositories.scss'
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+// https://api.github.com/orgs/rocketseat/repos
+
 const mockRepository = { name: "teste", description: "description", link: "link" };
 
-export function RepositoryList(props) {
-	const repositories = props.repositories;
+export function RepositoryList() {
+	const [repositories, setRepositories] = useState([]);
+
+	async function fetchRepos() {
+		try {
+			const response = await axios.get('https://api.github.com/orgs/rocketdseat/repos')
+			setRepositories(response.data);
+		} catch (error) {
+			console.log(error.message)
+			alert(error.message)
+		}
+
+	}
+
+	useEffect(() => {
+		fetchRepos();
+	}, [])
+
 	return (
 		<section className="repository-list">
 			<h1>Repositories</h1>
 
 			<ul>
-				<RepositoryItem
-					repository={mockRepository} />
+				{
+					repositories.map(repository => <RepositoryItem
+						repository={repository} />)
+				}
 			</ul>
 		</section>
 	)
